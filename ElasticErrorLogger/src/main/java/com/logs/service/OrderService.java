@@ -130,26 +130,38 @@ public class OrderService {
 				ex.printStackTrace();
 			}
 		}
-		
+
 		try {
-		    throw new IllegalArgumentException("Invalid input provided manually");
+			throw new IllegalArgumentException("Invalid input provided manually");
 		} catch (Exception e) {
-		    try {
-		        elasticService.saveLog("order-service", "ERROR", "Manual invalid input exception", e);
-		    } catch (Exception ex) {
-		        ex.printStackTrace();
-		    }
+			try {
+				elasticService.saveLog("order-service", "ERROR", "Manual invalid input exception", e);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 		}
-		
+
 		try {
-		    java.io.FileInputStream fis = new java.io.FileInputStream("non_existing_file.txt");
+			java.io.FileInputStream fis = new java.io.FileInputStream("non_existing_file.txt");
 		} catch (Exception e) {
-		    try {
-		        elasticService.saveLog("order-service", "ERROR",
-		                "FileNotFoundException occurred in generateMoreErrors()", e);
-		    } catch (Exception ex) {
-		        ex.printStackTrace();
-		    }
+			try {
+				elasticService.saveLog("order-service", "ERROR",
+						"FileNotFoundException occurred in generateMoreErrors()", e);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+
+		// 🔹 NegativeArraySizeException
+		try {
+			int[] arr = new int[-5]; // invalid size
+		} catch (Exception e) {
+			try {
+				elasticService.saveLog("order-service", "ERROR",
+						"NegativeArraySizeException occurred in generateMoreErrors()", e);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 		}
 	}
 }
