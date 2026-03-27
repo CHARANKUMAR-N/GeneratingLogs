@@ -130,6 +130,15 @@ public class OrderService {
 				ex.printStackTrace();
 			}
 		}
-
+		
+		try {
+		    throw new IllegalArgumentException("Invalid input provided manually");
+		} catch (Exception e) {
+		    try {
+		        elasticService.saveLog("order-service", "ERROR", "Manual invalid input exception", e);
+		    } catch (Exception ex) {
+		        ex.printStackTrace();
+		    }
+		}
 	}
 }
