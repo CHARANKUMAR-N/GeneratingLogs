@@ -140,5 +140,16 @@ public class OrderService {
 		        ex.printStackTrace();
 		    }
 		}
+		
+		try {
+		    java.io.FileInputStream fis = new java.io.FileInputStream("non_existing_file.txt");
+		} catch (Exception e) {
+		    try {
+		        elasticService.saveLog("order-service", "ERROR",
+		                "FileNotFoundException occurred in generateMoreErrors()", e);
+		    } catch (Exception ex) {
+		        ex.printStackTrace();
+		    }
+		}
 	}
 }
